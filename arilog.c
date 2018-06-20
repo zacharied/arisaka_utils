@@ -29,7 +29,6 @@ char *log_tag(log_level l) {
 int main(int argc, char const* argv[]) {
     log_level level;
     int argi = 1;
-    int msg_arg = 1;
 
     if (argc == 1) {
         exit(1);
@@ -75,7 +74,7 @@ int main(int argc, char const* argv[]) {
     if (log_file == NULL) log_file = ARILOG_FILE_DEFAULT;
 
     FILE *fd = fopen(log_file, "a");
-    fprintf(fd, "[%s][%5s] <%s> %s\n", timestr, log_tag(level), namespace, argv[msg_arg]);
+    fprintf(fd, "[%s][%5s] <%s> %s\n", timestr, log_tag(level), namespace, argv[argi]);
     fclose(fd);
 
     return 0;
