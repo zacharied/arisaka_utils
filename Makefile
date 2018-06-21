@@ -10,6 +10,10 @@ OUT_BIN = out_bin
 TARGET_ARI_BIN ?= ${ARISAKA_BIN}/arisaka
 TARGET_BIN ?= ~/bin
 
+define shell_note
+	sed -i '2i # This script is generated from ari_utils. Do not edit it.' $(1)
+endef
+
 all: arilog ariview
 
 install:
@@ -21,6 +25,7 @@ arilog:
 
 ariview:
 	cp ariview.sh $(OUT_BIN)/ariview
+	@$(call shell_note,$(OUT_BIN)/ariview)
 	chmod +x $(OUT_BIN)/ariview
 
 .PHONY: all install
