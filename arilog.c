@@ -18,9 +18,9 @@ typedef enum {
 
 char *log_tag(log_level l) {
     switch (l) {
-        case INFO:    return "INFO ";
+        case INFO:    return "INFO";
         case DEBUG:   return "DEBUG";
-        case WARNING: return "WARN ";
+        case WARNING: return "WARN";
         case ERROR:   return "ERROR";
         default:      return NULL;
     }
