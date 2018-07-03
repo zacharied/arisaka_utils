@@ -26,7 +26,7 @@ char *log_tag(log_level l) {
     }
 }
 
-int main(int argc, char const* argv[]) {
+int main(int argc, char const *argv[]) {
     log_level level;
     int argi = 1;
 
