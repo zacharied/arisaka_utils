@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include <time.h>
+#include <unistd.h>
+
+#include <fcntl.h>
+#include <sys/file.h>
 
 #define ARILOG_FILE_DEFAULT strcat(getenv("HOME"), "/.arilog")
 
@@ -73,9 +75,10 @@ int main(int argc, char const *argv[]) {
     char *log_file = getenv("ARILOG_FILE");
     if (log_file == NULL) log_file = ARILOG_FILE_DEFAULT;
 
-    FILE *fd = fopen(log_file, "a");
-    fprintf(fd, "[%s][%5s] <%s> %s\n", timestr, log_tag(level), namespace, argv[argi]);
-    fclose(fd);
+    int fd = open(log_file, O_APPEND);
+    flock(fd, LOCK_EX);
+    dprintf(fd, "[%s][%5s] <%s> %s\n", timestr, log_tag(level), namespace, argv[argi]);
+    close(fd);
 
     return 0;
 }
